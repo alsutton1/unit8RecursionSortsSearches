@@ -11,12 +11,14 @@ public class FractalTreePanel extends JPanel
     {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
-        drawFractal(g,500,500,500,425,20,75,90);
+        drawFractal(g,500,500,500,425,20,75,90,1);
     }
     
-    public void drawFractal (Graphics g,int preX, int preY, int x, int y, int angle, int length, int currentAngle)
+    public void drawFractal (Graphics g,int preX, int preY, int x, int y, int angle, int length, int currentAngle,
+                             int colorType)
     {
         int newLength, newX1, newY1, newX2, newY2;
+        Graphics2D g2 = (Graphics2D) g;
         g.drawLine(preX, preY, x, y);
         if (length > 1)
         {
@@ -39,9 +41,19 @@ public class FractalTreePanel extends JPanel
             
             newY1 = getNewY(y,newAngle1,newLength);
             newY2 = getNewY(y,newAngle2,newLength);
+            if (colorType == 1)
+            {
+                g2.setColor(Color.GREEN);
+                colorType = 2;
+            }
+            else if (colorType == 2)
+            {
+                g2.setColor(Color.BLUE);
+                colorType = 1;
+            }
             
-            drawFractal(g, x, y, newX1, newY1, angle, newLength, newAngle1);
-            drawFractal(g, x, y, newX2, newY2, angle, newLength, newAngle2);
+            drawFractal(g, x, y, newX1, newY1, angle, newLength, newAngle1, colorType);
+            drawFractal(g, x, y, newX2, newY2, angle, newLength, newAngle2, colorType);
         }
         
     }
