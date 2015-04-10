@@ -1,0 +1,26 @@
+
+public class SelectionSorter
+{
+    public static void sort(int[] a)
+    {
+        //scan unsorted portion of the array
+        //find the least value and sort it least to greatest
+        for(int x = 0; x < a.length - 1; x++)
+        {
+            int smallestValue = a[x];
+            int smallestIndex = x;
+            for(int y = 0; y < a.length; y++)
+            {
+                if (a[y] < smallestValue)
+                {
+                    smallestValue = a[y];
+                    smallestIndex = y;
+                }
+            }
+            //swap the smallest value with the beginning of the unsorted portion of the array
+            int temp = a[x];
+            a[x] = a[smallestValue];
+            a[smallestIndex] = temp;
+        }
+    }
+}
